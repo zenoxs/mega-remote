@@ -1,17 +1,19 @@
-// Ionic Starter App
+// Ionic Starter App // ionic emulate ios -l -c
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+  .run(function ($ionicPlatform) {
+  $ionicPlatform.ready(function () {
+    
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if (window.StatusBar) {
@@ -21,7 +23,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -38,46 +43,65 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+    .state('tab.home', {
+    url: '/home',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-home': {
+        templateUrl: 'templates/tab-home.html',
+        controller: 'HomeCtrl'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
+    .state('tab.connect', {
+    url: '/connect',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-connect': {
+        templateUrl: 'templates/tab-connect.html',
+        controller: 'ConnectCtrl'
+      }
+    }
+  })
+    .state('tab.remote', {
+    url: '/connect/:server',
+    views: {
+      'tab-connect': {
+        templateUrl: 'templates/remote-gamepad.html',
+        controller: 'RemoteCtrl'
+      }
+    }
+  })
+
+  /*.state('tab.chats', {
+  url: '/chats',
+  views: {
+    'tab-chats': {
+      templateUrl: 'templates/tab-chats.html',
+      controller: 'ChatsCtrl'
+    }
+  }
+})
+  .state('tab.chat-detail', {
+  url: '/chats/:chatId',
+  views: {
+    'tab-chats': {
+      templateUrl: 'templates/chat-detail.html',
+      controller: 'ChatDetailCtrl'
+    }
+  }
+})*/
+
+    .state('tab.option', {
+    url: '/option',
+    views: {
+      'tab-option': {
+        templateUrl: 'templates/tab-option.html',
+        controller: 'OptionCtrl'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });

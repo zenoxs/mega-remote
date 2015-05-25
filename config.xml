@@ -14,6 +14,8 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
   <feature name="StatusBar">
-    <param name="ios-package" value="CDVStatusBar" onload="true"/>
+    <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
+  <plugin name="com.albahra.plugin.networkinterface" spec="https://github.com/salbahra/NetworkInterfacePlugin"/>
+  <plugin name="com.vallieres.plugin.getrouteripaddress" spec="https://github.com/vallieres/cordova-plugin-get-router-ip-address"/>
 </widget>
