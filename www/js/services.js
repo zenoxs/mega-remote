@@ -62,7 +62,7 @@ angular.module('starter.services', [])
   return {
     scan: function (adress, callback) {
       $http({
-        timeout : 10,
+        timeout : 100,
         url: adress,
         method: "GET",
         params : { "action": "scan" }
