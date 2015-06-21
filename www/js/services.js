@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('mega-remote.services', [])
 
   .factory('Chats', function () {
   // Might use a resource here that returns a JSON array
@@ -48,6 +48,37 @@ angular.module('starter.services', [])
     }
   };
 })
+  .factory('Socket', function ($rootScope) {
+
+  var Socket = function (hostName, port, updated) {
+    this.socket = io.connect(hostName + ':' + port);
+    console.log('New socket created');
+  };
+
+  Socket.prototype.on = function (eventName, callback) {
+    var that = this;
+    this.socket.on(eventName, function () {
+      var args = arguments;
+      $rootScope.$apply(function () {
+        callback.apply(that.socket, args);
+      });
+    });
+  };
+
+  Socket.prototype.emit = function (eventName, data, callback) {
+    var that = this;
+    this.socket.emit(eventName, data, function () {
+      var args = arguments;
+      $rootScope.$apply(function () {
+        if (callback) {
+          callback.apply(that.socket, args);
+        }
+      });
+    });
+  };
+
+  return Socket;
+})
   .factory('Router', ['$q', function ($q) {
 
   return {
@@ -62,10 +93,10 @@ angular.module('starter.services', [])
   return {
     scan: function (adress, callback) {
       $http({
-        timeout : 100,
+        timeout: 100,
         url: adress,
         method: "GET",
-        params : { "action": "scan" }
+        params: { "action": "scan" }
       }).success(function (res) {
         console.log('success');
         callback(res);

@@ -3,8 +3,8 @@
     <ion-list>
       <button class="button button-full button-positive" ng-click="searchDesktop()">Search Desktop</button>
       <ion-item class="item-icon-right" ng-repeat="server in servers" type="item-text-wrap" href="#/tab/connect/{{server}}">
-        <h2>{{server.name}}</h2>
-        <p>{{server.address}}</p>
+        <h2>{{server.serviceName}}</h2>
+        <p>{{server.domain}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
