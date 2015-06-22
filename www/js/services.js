@@ -51,7 +51,7 @@ angular.module('mega-remote.services', [])
   .factory('Socket', function ($rootScope) {
 
   var Socket = function (hostName, port, updated) {
-    this.socket = io.connect(hostName + ':' + port);
+    this.socket = io.connect(hostName + ':' + port, {'force new connection': true});
     console.log('New socket created');
   };
 
@@ -75,6 +75,10 @@ angular.module('mega-remote.services', [])
         }
       });
     });
+  };
+
+  Socket.prototype.close = function () {
+    this.socket.close();
   };
 
   return Socket;
