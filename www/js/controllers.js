@@ -20,7 +20,7 @@ angular.module('mega-remote.controllers', [])
       showDelay: 0
     });
 
-    window.plugins.dnssd.browse("_mega-retro._tcp", "",
+    window.plugins.dnssd.browse("_mega-retro._tcp", "local.",
       function serviceFound(serviceName, regType, domain, moreComing) {
 
         var server = {
