@@ -51,7 +51,8 @@ angular.module('mega-remote.services', [])
   .factory('Socket', function ($rootScope) {
 
   var Socket = function (hostName, port, updated) {
-    this.socket = io.connect(hostName + ':' + port, {'force new connection': true});
+    this.socket = io.connect('http://'+hostName+':'+port, {'force new connection': true});
+    console.log('http://'+hostName+':'+port);
     console.log('New socket created');
   };
 
